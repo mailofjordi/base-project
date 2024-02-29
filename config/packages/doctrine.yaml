@@ -8,6 +8,8 @@ doctrine:
 
         profiling_collect_backtrace: '%kernel.debug%'
         use_savepoints: true
+        types:
+            author_id: App\About\Infrastructure\Persistence\Doctrine\AuthorIdType
     orm:
         auto_generate_proxy_classes: true
         enable_lazy_ghost_objects: true
@@ -16,11 +18,11 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
-                type: attribute
+            About:
+                type: xml
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
+                dir: '%kernel.project_dir%/src/About/Infrastructure/Persistence/Doctrine/Mappings'
+                prefix: 'App\About\Domain'
                 alias: App
 
 when@test:
