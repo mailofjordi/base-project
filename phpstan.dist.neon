@@ -1,0 +1,14 @@
+parameters:
+    level: 9
+    paths:
+        - bin/
+        - config/
+        - public/
+        - src/
+        - tests/
+
+services:
+	-
+		class: \App\Shared\Infrastructure\PhpStan\SymfonyMessengerHandler
+		tags:
+			- phpstan.properties.readWriteExtension

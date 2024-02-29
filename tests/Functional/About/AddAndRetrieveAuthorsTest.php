@@ -11,7 +11,9 @@ class AddAndRetrieveAuthorsTest extends WebTestCase
     public function testGivenANonUuid4Id_WhenAddingAnAuthor_ThenAnExceptionIsThrown(): void
     {
         $client = self::createClient(['environment' => 'test']);
-        $json_encode = json_encode([
+
+        /** @var string $jsonData */
+        $jsonData = json_encode([
             'id' => '123',
             'name' => 'John Doe',
         ]);
@@ -22,7 +24,7 @@ class AddAndRetrieveAuthorsTest extends WebTestCase
             [],
             [],
             ['CONTENT_TYPE' => 'application/json'],
-            $json_encode
+            $jsonData
         );
         $this->assertEquals(500, $client->getResponse()->getStatusCode());
     }
@@ -30,16 +32,18 @@ class AddAndRetrieveAuthorsTest extends WebTestCase
     public function testGivenAnUuid4Id_WhenAddingAnAuthor_ThenTheAuthorIsAdded(): void
     {
         $client = self::createClient(['environment' => 'test']);
+        /** @var string $jsonData */
+        $jsonData = json_encode([
+            'id' => '123e4567-e89b-12d3-c456-426655440000',
+            'name' => 'Pepito Grillo',
+        ]);
         $client->request(
             'POST',
             '/author',
             [],
             [],
             ['CONTENT_TYPE' => 'application/json'],
-            json_encode([
-                'id' => '123e4567-e89b-12d3-c456-426655440000',
-                'name' => 'Pepito Grillo',
-            ])
+            $jsonData
         );
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
