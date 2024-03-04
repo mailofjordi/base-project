@@ -8,8 +8,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - uses: adambirds/docker-compose-action@v1.3.0
-              with:
-                compose-file: compose.yaml
-                test-container: php
-                test-command: php vendor/bin/phpunit
+            - uses: "ramsey/composer-install@v2"
+            - name: docker compose run tests
+              run: docker compose exec php php vendor/bin/phpunit
