@@ -8,8 +8,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - uses: satackey/action-docker-layer-caching@v0.0.11
-              continue-on-error: true
             - name: docker compose up
               run: docker compose up -d
             - name: composer install
