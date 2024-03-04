@@ -12,5 +12,9 @@ jobs:
               run: docker compose up -d
             - name: composer install
               run: docker compose exec php composer install
+            - name: docker compose create DB
+              run: docker compose exec php bin/console doctrine:database:create --env=test
+            - name: docker compose run migrations
+              run: docker compose exec php bin/console doctrine:migrations:migrate --no-interaction --env=test
             - name: docker compose run tests
               run: docker compose exec php php vendor/bin/phpunit
