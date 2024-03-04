@@ -12,5 +12,7 @@ jobs:
               with:
                 php-version: "8.3"
             - uses: "ramsey/composer-install@v2"
+            - name: docker compose build
+              run: docker compose build
             - name: docker compose run tests
-              run: docker compose run php php vendor/bin/phpunit
+              run: docker compose exec php php vendor/bin/phpunit
