@@ -12,6 +12,8 @@ jobs:
               run: docker compose up -d
             - name: vendor folder delete
               run: docker compose exec php rm -rf vendor 
+            - name: composer clear-cache
+              run: docker compose exec php composer clear-cache 
             - name: composer install
               run: docker compose exec php composer install
             - name: cs-fixer
