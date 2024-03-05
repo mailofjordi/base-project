@@ -9,13 +9,7 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - name: docker compose up
-              run: docker compose up -d
-            - name: vendor folder delete
-              run: docker compose exec php rm -rf vendor 
-            - name: composer clear-cache
-              run: docker compose exec php composer clear-cache 
-            - name: composer install
-              run: docker compose exec php composer install
+              run: docker compose up -d --build --wait
             - name: cs-fixer
               run: docker compose exec php vendor/bin/php-cs-fixer check --diff
             - name: phpstan
