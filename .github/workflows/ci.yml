@@ -8,6 +8,14 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
+            - name: Cache Docker images
+              uses: actions/cache@v2
+              with:
+                path: |
+                  ~/.docker
+                key: docker-images-${{ runner.os }}-${{ hashFiles('**/Dockerfile') }}
+                restore-keys: |
+                  docker-images-${{ runner.os }}-
             - name: docker compose up
               run: docker compose up -d --build --wait
             - name: lint with php-cs-fixer
